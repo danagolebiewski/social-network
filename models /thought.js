@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const thoughtSchema = require('./User');
+const reactionSchema = require('./Reaction');
 
 // Schema to create Student model
 const thoughtSchema = new Schema(
@@ -13,21 +13,31 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // Use a getter method to format the timestamp on query... add this? Didn't go over virtuals yet
+      get: (timestamp) => {
+        return new Date(timestamp).toLocaleString;
     },
+  },
     username: {
       type: String,
       required: true,
     },
-    reactions: [reactionSchema], //don't understand this one? just going off of mini project
+    reactions: [reactionSchema], 
   },
   {
     toJSON: {
       virtuals: true,
       getters: true,
     },
-  }
+    id: false,
+  },
 );
+
+thoughtSchema
+  .virtual("reactionCount")
+  // Getter
+  .get(function () {
+    return this.reactions.length;
+  });
 
 const Thought = model('thought', thoughtSchema);
 
