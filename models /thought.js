@@ -2,32 +2,33 @@ const { Schema, model } = require('mongoose');
 const thoughtSchema = require('./User');
 
 // Schema to create Student model
-const studentSchema = new Schema(
+const thoughtSchema = new Schema(
   {
-    first: {
+    thoughtText: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 280,
+      minlength: 1,
     },
-    last: {
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      // Use a getter method to format the timestamp on query... add this? Didn't go over virtuals yet
+    },
+    username: {
       type: String,
       required: true,
-      max_length: 50,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
-    assignments: [assignmentSchema],
+    reactions: [reactionSchema], //don't understand this one? just going off of mini project
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
   }
 );
 
-const Student = model('student', studentSchema);
+const Thought = model('thought', thoughtSchema);
 
-module.exports = Student;
+module.exports = Thought;
