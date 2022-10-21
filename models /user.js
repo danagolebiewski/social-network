@@ -1,11 +1,7 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
   {
-    // assignmentId: {
-    //   type: Schema.Types.ObjectId,
-    //   default: () => new Types.ObjectId(),
-    // },
     userName: {
       type: String,
       required: true,
@@ -16,23 +12,32 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
+      match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/] //used regex to validate email 
     },
     thoughts: {
       type: Schema.Types.ObjectId,
       ref: 'Thoughts',
     },
-    thoughts: {
+    friends: {
       type: Schema.Types.ObjectId,
-      ref: 'Users',
+      ref: 'User',
     },
   },
   {
     toJSON: {
+      //you can use virtuals to set multiple properties at once? 
+      virtuals: true,
+      //don't fully understand getters 
       getters: true,
     },
     id: false,
   }
 );
 
-module.exports = assignmentSchema;
+UserSchema.virtual('friendCount').get(function() {
+  return this.friends.length;
+})
+
+const User = model('User', UserSchema);
+
+module.exports = User;
