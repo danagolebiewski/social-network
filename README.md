@@ -5,5 +5,5 @@ TO DO
 User controller 
 Thought controller 
 
-util seed.js
+util seed.js - do we need the utils file since we're not seeding info but inputting it in insomnia?
 
