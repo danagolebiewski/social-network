@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const {
   getAllUsers,
   getSingleUser,
@@ -6,19 +7,18 @@ const {
   updateUser,
   deleteUser,
   addFriend,
-  removeFriend,
+  deleteFriend,
 } = require('../../controllers/UserController');
 
-// /api/Users
-router.route('/').get(getUsers).post(createUser);
+// /api/Users < get, post>
+router.route('/').get(getAllUsers).post(createUser);
 
-// /api/Users/:UserId
-router.route('/:UserId').get(getSingleUser).delete(deleteUser);
+// /api/Users/:UserId <Get, put, delete>
+router.route('/:UserId').get(getSingleUser).put(updateUser).delete(deleteUser);
+//do we need a userId in the user.js model file?
 
-// /api/Users/:UserId/assignments
-router.route('/:UserId/assignments').post(addAssignment);
+// /api/Users/:UserId/friends/:friendId <post, delete> 
+router.route('/:UserId/friends/:friendID').post(addFriend).delete(deleteFriend);
 
-// /api/Users/:UserId/assignments/:assignmentId
-router.route('/:UserId/assignments/:assignmentId').delete(removeAssignment);
 
 module.exports = router;
