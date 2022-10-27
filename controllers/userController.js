@@ -1,5 +1,5 @@
 // Require User Model
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 // Set up User Controller
 const userController = {
