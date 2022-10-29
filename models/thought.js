@@ -22,7 +22,6 @@ const reactionSchema = new Schema(
         return new Date(timestamp).toLocaleString;
     },
   },
-    reaction: [reactionSchema],
   },
   {
     toJSON: {
