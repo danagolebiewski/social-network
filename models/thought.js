@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const reactionSchema = new Schema(
   {
@@ -11,7 +11,7 @@ const reactionSchema = new Schema(
       required: true,
       max_length: 280,
     },
-    username: {
+    userName: {
       type: String,
       required: true,
     },
@@ -45,7 +45,7 @@ const thoughtSchema = new Schema(
         return new Date(timestamp).toLocaleString;
     },
   },
-    username: {
+    userName: {
       type: String,
       required: true,
     },
