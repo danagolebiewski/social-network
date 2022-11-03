@@ -30,8 +30,6 @@ const userController = {
       .populate("thoughts")
       // return if no user is found
       .then((dbUserData) => {
-        console.log(dbUserData)
-        console.log(userId)
         if (!dbUserData) {
           return res
             .status(404)
@@ -48,7 +46,7 @@ const userController = {
   // Update a current User by ID
   updateUser(req, res) {
     User.findOneAndUpdate(
-      { _id: params.userId },
+      { _id: req.params.userId },
       { $set: req.body },
       {
         new: true,

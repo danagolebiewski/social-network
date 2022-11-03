@@ -14,7 +14,7 @@ const {
 router.route('/').get(getAllUsers).post(createUser);
 
 // /api/Users/:UserId <Get, put, delete>
-router.route('/:UserId').get(getSingleUser).put(updateUser).delete(deleteUser);
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
 //do we need a userId in the user.js model file? / do we have to add get single user by populated thought and friend data? in read me
 
 // /api/Users/:UserId/friends/:friendId <post, delete> 
