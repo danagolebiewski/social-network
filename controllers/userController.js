@@ -24,12 +24,14 @@ const userController = {
 
   // Get single user by ID
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
-      .populate("thoughts")
-      .populate("friends")
+    User.findById({ _id: req.params.userId })
       .select("-__v")
+      .populate("friends")
+      .populate("thoughts")
       // return if no user is found
       .then((dbUserData) => {
+        console.log(dbUserData)
+        console.log(userId)
         if (!dbUserData) {
           return res
             .status(404)

@@ -29,11 +29,8 @@ const UserSchema = new Schema(
   },
   {
     toJSON: {
-      //you can use virtuals to set multiple properties at once?
       virtuals: true,
-      //don't fully understand getters
-      getters: true,
-    },
+   },
     id: false,
   }
 );
